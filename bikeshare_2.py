@@ -2,35 +2,51 @@ import time
 import pandas as pd
 import numpy as np
 
-CITY_DATA = {'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv'}
+CITY_DATA = {'Chicago': 'chicago.csv',
+             'New York City': 'new_york_city.csv',
+             'Washington': 'washington.csv'}
 
-def check_input(input_str,input_type):
+
+def get_filters():
     """
-    check the validity of user input.
-    input_str: is the input of the user
-    input_type: is the type of input: 1 = city, 2 = month, 3 = day
+    Asks user to specify a city, month, and day to analyze.
+    Returns:
+        (str) city - name of the city to analyze
+        (str) month - name of the month to filter by, or "all" to apply no month filter
+        (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
+
+    print('\nHello! Let\'s explore some US bikeshare data!')
+ 
+
+
     while True:
-        input_read=input(input_str)
-        try:
-            if input_read in ['chicago','new york city','washington'] and input_type == 1:
-                break
-            elif input_read in ['january', 'february', 'march', 'april', 'may', 'june','all'] and input_type == 2:
-                break
-            elif input_read in ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','all'] and input_type == 3:
-                break
-            else:
-                if input_type == 1:
-                    print("Sorry, your input should be: chicago new york city or washington")
-                if input_type == 2:
-                    print("Sorry, your input should be: january, february, march, april, may, june or all")
-                if input_type == 3:
-                    print("Sorry, your input should be: sunday, ... friday, saturday or all")
-        except ValueError:
-            print("Sorry, your input is wrong")
-    return input_read
+      city = input("\nWhich city would you like to filter by? New York City, Chicago or Washington?\n")
+      if city not in ('New York City', 'Chicago', 'Washington'):
+        print("Sorry, I didn't catch that. Try again.")
+        continue
+      else:
+        break
+
+
+    while True:
+      month = input("\nWhich month would you like to filter by? January, February, March, April, May, June or type 'all' if you do not have any preference?\n")
+      if month not in ('January', 'February', 'March', 'April', 'May', 'June', 'all'):
+        print("Sorry, I didn't catch that. Try again.")
+        continue
+      else:
+        break
+
+    while True:
+      day = input("\nAre you looking for a particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or type 'all' if you do not have any preference.\n")
+      if day not in ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'all'):
+        print("Sorry, I didn't catch that. Try again.")
+        continue
+      else:
+        break
+
+    print('-'*40)
+    return city, month, day
 
 def get_filters():
     """
